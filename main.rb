@@ -1,4 +1,4 @@
-# A program that randomly generates wise statements, implementing what I think amounts to a context-free grammar.
+# A program that randomly generates wise statements, according to what I think amounts to a context-free grammar.
 # With a different data file, it could be made to generate statements that aren't wise.
 # TO DO: consider fixing how it handles capitalization.
 
