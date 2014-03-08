@@ -8,14 +8,14 @@ MAX_EXPANSION_LEVEL = 100 # Prevent accidental infinite loops.
 
 # Nugget of wisdom.
 class Wisdom < String
-  def initialize(initial_string)
-    super(initial_string)
+  def initialize(template_string)
+    super(template_string)
     expand_fully
   end
 
   # Are all the bracketed terms expanded?
   def expanded?
-    !include?('[') && !include?(']')
+    match(/\[(.*?)\]/).nil?
   end
 
   # Expand all the bracketed terms once, replacing them by a random choice from the corresponding list in the data file.
