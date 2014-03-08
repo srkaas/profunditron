@@ -4,7 +4,7 @@
 
 require 'yaml'
 DATA = YAML.load_file('data.yaml')
-MAX_EXPANSION_LEVEL = 100 # Prevent accidental infinite loops.
+MAX_EXPANSION_LEVEL = 10 # Prevent accidental infinite loops.
 
 # Nugget of wisdom.
 class Wisdom < String
@@ -20,7 +20,13 @@ class Wisdom < String
 
   # Expand all the bracketed terms once, replacing them by a random choice from the corresponding list in the data file.
   def expand
-    gsub!(/\[(.*?)\]/) { |term| DATA[$1].sample }
+    gsub!(/\[(.*?)\]/) do |term|
+      if DATA.key?($1)
+        DATA[$1].sample
+      else
+        'ERROR: NO RULES FOUND FOR THE TERM QUOTE ' + $1 + ' UNQUOTE. WRITE SOME RULES FOR THAT TERM OR REMOVE IT.'
+      end
+    end
   end
 
   # Expand until all the brackets are gone.
