@@ -21,10 +21,10 @@ class Wisdom < String
   # Expand all the bracketed terms once, replacing them by a random choice from the corresponding list in the data file.
   def expand
     gsub!(/\[(.*?)\]/) do |term|
-      if DATA.key?($1)
+      if DATA.key?($1) && DATA[$1].size > 0
         DATA[$1].sample
       else
-        'ERROR: NO RULES FOUND FOR THE TERM QUOTE ' + $1 + ' UNQUOTE. WRITE SOME RULES FOR THAT TERM OR REMOVE IT.'
+        term
       end
     end
   end
